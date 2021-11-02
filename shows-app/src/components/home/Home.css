@@ -1,0 +1,16 @@
+.home{
+    text-align: center;
+}
+
+.title{
+    font-size: 8vw;
+    margin: 5vh;
+    text-align: center;
+}
+
+.weekly-movies{
+    background-color: rgb(192, 189, 189);
+    max-width: 90vw;
+    margin-left: 5vw;
+    padding: 2vw;
+}
