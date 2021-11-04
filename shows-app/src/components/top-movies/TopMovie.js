@@ -1,6 +1,9 @@
+import { useHistory } from 'react-router';
 import './TopMovie.css';
 
 const TopMoive = (props) => {
+    const history = useHistory();
+    
     const getSummary = () => {
         const regex = /<[^>]*>/g;
         const newSummary = String(props.movie.summary).replace(regex, '').substring(0, 200) + '...';
@@ -13,6 +16,10 @@ const TopMoive = (props) => {
         return genresString;
     }
 
+    const showMoreHandler = () => {
+        history.push(`/shows/${props.movie.id}`);
+    }
+
     return(
         <div className="top-movie">
             <img className="top-movie-poster" alt="poster" src={props.movie.image.original}></img>
@@ -20,7 +27,7 @@ const TopMoive = (props) => {
                 <h1 className="top-movie-title">{props.movie.name}</h1>
                 <h1 className="genres">{getGenres()}</h1>
                 <h1 className="summary">{getSummary()}</h1>
-                <button className="show-more-btn">Show more</button>
+                <button onClick={showMoreHandler} className="show-more-btn">Show more</button>
             </div>
         </div>
     )

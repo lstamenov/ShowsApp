@@ -1,0 +1,64 @@
+.show-container{
+    background-color: rgb(192, 189, 189);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(146, 143, 143);
+}
+
+.container{
+    background-color: rgb(192, 189, 189);
+    width: 90vw;
+    margin: 5vw;
+}
+
+.show-poster{
+    width: 40vw;
+    height: 50vw;
+}
+
+.show-title{
+    width: 50vw;
+    font-size: 4vw;
+    background-color: rgb(211, 208, 208);
+    margin-bottom: 5vw;
+}
+
+.show-detail{
+    text-align: left;
+    border-top: 1px solid rgb(146, 143, 143);
+    border-bottom: 1px solid rgb(146, 143, 143);
+    font-size: 2vw;
+    font-weight: lighter;
+    margin-top: -3px;
+    padding: 1px;
+    padding-left: 1vw;
+}
+
+.show-detail span{
+    font-weight: bold;
+}
+
+.show-full-summary{
+    background-color: rgb(211, 208, 208);
+    width: 80vw;
+    margin-left: 5vw;
+    border-radius: 5px;
+}
+
+.show-full-summary h2 {
+    font-size: 5vw;
+    border-bottom: 1px solid rgb(146, 143, 143);
+    padding: 1vw;
+}
+
+.show-full-summary h3{
+    text-align: left;
+    font-size: 2.5vw;
+    padding: 5px;
+}
+
+.show-seasons{
+    font-size: 5vw;
+    border-bottom: 1px solid rgb(146, 143, 143);
+    padding: 1vw;
+}
