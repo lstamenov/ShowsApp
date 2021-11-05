@@ -4,16 +4,20 @@ import { Route, useLocation } from 'react-router';
 import Home from './components/home/Home';
 import Nav from './components/nav/Nav';
 import ShowOverview from './components/show-overview/ShowOverview';
+import Episodes from './components/episodes/Episodes';
 
 
 function App() {
   return (
     <div className="App">
       <Nav />
-      <Route path="/" exact>
+      <Route path="/home" exact>
         <Home />
       </Route>
-      <Route path="/shows/:id">
+      <Route to="/shows/:id/seasons/:id/episodes" exact>
+        <Episodes />
+      </Route>
+      <Route path="/shows/:id" exact>
         <ShowOverview />
       </Route>
     </div>
