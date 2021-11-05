@@ -35,9 +35,6 @@ const ShowOverview = () => {
         return genresString;
     }
 
-
-    console.log(seasons);
-
     return (
         <div>
             {show && <div  className="container">

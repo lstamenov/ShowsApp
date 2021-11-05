@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 
 
 const Season = (props) => {
+    console.log(props);
     return (
         <div className="season-container">
             <div>
@@ -13,7 +14,7 @@ const Season = (props) => {
                 <h3 className="show-detail">Premiere date: <span>{props.season.premiereDate}</span></h3>
                 <h3 className="show-detail">End date: <span>{props.season.endDate}</span></h3>
                 <h3 className="show-detail">Episodes: <span>{props.season.episodeOrder}</span></h3>
-                <button className="show-more-btn"><Link to={`/shows/${props.showId}/seasons/${props.season.id}/episodes`}>Show episodes</Link></button>
+                <button className="show-more-btn"><Link to={`/shows/${props.showId}/seasons/${props.season.number}/episodes`}>Show episodes</Link></button>
             </div>
         </div>
     )

@@ -1,0 +1,23 @@
+.season-overview-poster{
+    width: 50vw;
+    height: 60vw;
+    margin-bottom: -1vw;
+}
+
+.season-overview-container{
+    background-color: rgb(179, 177, 177);
+    width: 90vw;
+    margin: 5vw;
+}
+
+.season-overview-title{
+    font-size: 5vw;
+    font-weight: 1;
+    background-color: rgb(216, 216, 216);
+    margin-top: 0;
+    margin-bottom: 5vw;
+}
+
+.season-span{
+    font-weight: bold;
+}
