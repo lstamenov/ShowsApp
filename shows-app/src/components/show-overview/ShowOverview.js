@@ -21,7 +21,9 @@ const ShowOverview = () => {
             .then(res => setSeasons(res.data))
             .catch(err => console.error(err));
         }
-    }, [show])
+    }, [show]);
+
+    console.log(show);
 
     const getSummary = () => {
         const regex = /<[^>]*>/g;
@@ -46,7 +48,7 @@ const ShowOverview = () => {
                         <h3 className="show-detail">Language: <span>{show.language}</span></h3>
                         <h3 className="show-detail">Year: <span>{String(show.premiered).substring(0, 4)}</span></h3>
                         <h3 className="show-detail">Country: <span>{show.network.country.name}</span></h3>
-                        <h3 className="show-detail">Rating: <span>{show.rating.average}/10</span></h3>
+                        <h3 className="show-detail">Rating: <span>{show.rating ? show.rating.average : "N/A"}</span></h3>
                         <h3 className="show-detail">Average runtime: <span>{show.averageRuntime} minutes</span></h3>
                         <h3 className="show-detail">Official site: <a href={show.officialSite} target="_blank">{show.officialSite}</a></h3>
                     </div>

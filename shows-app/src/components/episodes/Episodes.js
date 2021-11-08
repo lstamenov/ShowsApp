@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import Episode from "../episode/Episode";
 import './Episodes.css';
+import defaultImage from '../no-image.jpg';
 
 const Episodes = () => {
-    const showId = useLocation().pathname.split('/')[2];
+    // const showId = useLocation().pathname.split('/')[2];
     const seasonId = useLocation().pathname.split('/')[2];
-    const [show, setShow] = useState();
-    const [seasons, setSeasons] = useState();
+    // const [show, setShow] = useState();
+    // const [seasons, setSeasons] = useState();
     const [episodes, setEpisodes] = useState();
     const [season, setSeason] = useState();
 
@@ -49,7 +50,7 @@ const Episodes = () => {
         <div className="season-overview-container">
             { episodes && season &&
             <div>
-                <img src={season.image.original} alt="poster" className="season-overview-poster"></img>
+                <img src={season.image ? season.image.original : defaultImage} alt="poster" className="season-overview-poster"></img>
                 <h1 className="season-overview-title">Season <span className="season-span">{season.number}</span></h1>
                 {episodes.map(episode => <Episode key={episode.id} episode={episode}/>)}
             </div>}

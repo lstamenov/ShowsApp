@@ -1,13 +1,13 @@
 import './Season.css';
 import {Link} from 'react-router-dom';
+import defaultImage from '../no-image.jpg';
 
 
 const Season = (props) => {
-    console.log(props);
     return (
-        <div className="season-container">
+        props.season && <div className="season-container">
             <div>
-                <img className="season-poster" src={props.season.image.original}></img>
+                <img className="season-poster" src={props.season.image ? props.season.image.original : defaultImage}></img>
             </div>
             <div className="season-details">
                 <h2 className="season-number">Season {props.season.number}</h2>
