@@ -6,53 +6,51 @@ import './Episodes.css';
 
 const Episodes = () => {
     const showId = useLocation().pathname.split('/')[2];
-    const seasonNumber = useLocation().pathname.split('/')[4];
+    const seasonId = useLocation().pathname.split('/')[2];
     const [show, setShow] = useState();
     const [seasons, setSeasons] = useState();
     const [episodes, setEpisodes] = useState();
     const [season, setSeason] = useState();
 
-    const getSeasonId = () => {
-        for(let i = 0; i < [...seasons].length; i++){
-            if(seasons[i].number == seasonNumber){
-                setSeason(seasons[i]);
-                return seasons[i].id;
-            }
-        }
+    const getSeason = async () => {
+        const response = await axios.get(`https://api.tvmaze.com/seasons/${seasonId}`);
+        const data = await response.data;
+        return data;
     }
 
     useEffect(() => {
-        axios.get(`https://api.tvmaze.com/shows/${showId}`)
-        .then(res => setShow(res.data))
+        getSeason()
+        .then(data => setSeason(data))
         .catch(err => console.error(err));
     }, []);
 
-    useEffect(() => {
-        if(show){
-            axios.get(`https://api.tvmaze.com/shows/${show.id}/seasons`)
-            .then(res => setSeasons(res.data))
-            .catch(err => console.error(err));
-        }
-    }, [show]);
+    // useEffect(() => {
+    //     axios.get(`https://api.tvmaze.com/shows/${showId}`)
+    //     .then(res => setShow(res.data))
+    //     .catch(err => console.error(err));
+    // }, []);
+
+    // useEffect(() => {
+    //     if(show){
+    //         axios.get(`https://api.tvmaze.com/shows/${show.id}/seasons`)
+    //         .then(res => setSeasons(res.data))
+    //         .catch(err => console.error(err));
+    //     }
+    // }, [show]);
 
     useEffect(() => {
-        if(seasons){
-            const seasonId = getSeasonId();
             axios.get(`https://api.tvmaze.com/seasons/${seasonId}/episodes`)
             .then(res => setEpisodes(res.data))
             .catch(err => console.error(err));
-        }
-    }, [seasons]);
+    }, []);
 
-    console.log(episodes);
-    console.log(season);
 
     return (
         <div className="season-overview-container">
-            {show && season && episodes && 
+            { episodes && season &&
             <div>
                 <img src={season.image.original} alt="poster" className="season-overview-poster"></img>
-                <h1 className="season-overview-title"><span className="season-span">{show.name}</span> Season {season.number}</h1>
+                <h1 className="season-overview-title">Season <span className="season-span">{season.number}</span></h1>
                 {episodes.map(episode => <Episode key={episode.id} episode={episode}/>)}
             </div>}
         </div>
