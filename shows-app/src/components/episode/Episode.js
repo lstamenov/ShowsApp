@@ -17,7 +17,7 @@ const Episode = (props) => {
                     <h3 className="episode-detail">Premier date: <span>{props.episode.airdate}</span></h3>
                     <h3 className="episode-detail">Number: <span>{props.episode.number}</span></h3>
                     <h3 className="episode-detail">Runtime: <span>{props.episode.runtime} minutes</span></h3>
-                    <h3 className="episode-detail">Rating: <span>{props.episode.rating.average}/10</span></h3>
+                    <h3 className="episode-detail">Rating: <span>{props.episode.rating.average ? props.episode.rating.average : "N/A"}</span></h3>
                 </div>
             </div>
             <div className="summary-container">
