@@ -7,7 +7,7 @@ const Season = (props) => {
     return (
         props.season && <div className="season-container">
             <div>
-                <img className="season-poster" src={props.season.image ? props.season.image.original : defaultImage}></img>
+                <img className="season-poster" src={props.season.image ? props.season.image.original : defaultImage} alt="poster"></img>
             </div>
             <div className="season-details">
                 <h2 className="season-number">Season {props.season.number}</h2>

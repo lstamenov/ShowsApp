@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
+import Actor from "../cast/Actor";
 import Season from "../season/Season";
 import './ShowOverview.css';
 
@@ -8,22 +9,37 @@ const ShowOverview = () => {
     const path = useLocation().pathname.split('/')[2];
     const [show, setShow] = useState();
     const [seasons, setSeasons] = useState();
+    const [cast, setCast] = useState();
 
-    useEffect(() => {
+    const fetchShowDataHandler = () => {
         axios.get(`https://api.tvmaze.com/shows/${path}`)
         .then(res => setShow(res.data))
         .catch(err => console.error(err));
-    }, []);
+    }
 
-    useEffect(() => {
+    const fetchCastDataHandler = () => {
+        axios.get(`https://api.tvmaze.com/shows/${path}/cast`)
+        .then(res => setCast(res.data))
+        .catch(err => console.error(err));
+    }
+
+    const fetchSeasonsDataHandler = () => {
         if(show){
             axios.get(`https://api.tvmaze.com/shows/${show.id}/seasons`)
             .then(res => setSeasons(res.data))
             .catch(err => console.error(err));
         }
+    }
+
+    useEffect(() => {
+        fetchShowDataHandler();
+        fetchCastDataHandler();
+    }, [path]);
+
+    useEffect(() => {
+        fetchSeasonsDataHandler();
     }, [show]);
 
-    console.log(show);
 
     const getSummary = () => {
         const regex = /<[^>]*>/g;
@@ -37,11 +53,13 @@ const ShowOverview = () => {
         return genresString;
     }
 
+    console.log(cast);
+
     return (
         <div>
             {show && <div  className="container">
                 <div className="show-container">
-                    <div><img className="show-poster" src={show.image.original}></img></div>
+                    <div><img className="show-poster" src={show.image.original} alt="poster"></img></div>
                     <div className="show-details">
                         <h2 className="show-title">{show.name}</h2>
                         <h3 className="show-detail">Genres: <span>{getGenres()}</span></h3>
@@ -57,6 +75,11 @@ const ShowOverview = () => {
                     <h2>Summary</h2>
                     <h3>{getSummary()}</h3>
                 </div>
+                {cast && 
+                    <div>
+                        <h2 className="show-seasons">Cast</h2>
+                        {cast.map(actor => <Actor key={actor.person.id} actor={actor}/>)}
+                    </div>}
                 {seasons && 
                     <div>
                         <h2 className="show-seasons">Seasons</h2>

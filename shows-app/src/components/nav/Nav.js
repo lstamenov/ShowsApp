@@ -17,9 +17,9 @@ const Nav = () => {
         </a>
         <div className="navbar-links">
           <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><a href="#">Actors</a></li>
-            <li><a href="#">Movies</a></li>
+            <li><Link to="/" onClick={showMenuHandler}>Home</Link></li>
+            <li><a href="#" onClick={showMenuHandler}>Actors</a></li>
+            <li><a href="#" onClick={showMenuHandler}>Movies</a></li>
           </ul>
         </div>
       </nav>
