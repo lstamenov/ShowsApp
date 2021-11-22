@@ -6,10 +6,14 @@ import TopMoive from '../top-movies/TopMovie';
 const Home = () => {
     const [movies, setMovies] = useState();
 
-    useEffect(async () => {
+    const fetchShowsDataHandler = async () => {
         const response = await axios.get('https://api.tvmaze.com/shows');
         const allMovies = await response.data;
         setMovies(allMovies.filter((element, index) => index < 20));
+    }
+
+    useEffect(() => {
+        fetchShowsDataHandler();
     }, []);
 
     return (

@@ -1,0 +1,56 @@
+.actor-container{
+    display: flex;
+    justify-content: flex-start;
+    margin: 1vw 0;
+    background-color: rgb(235, 228, 221);
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 3px 5px 15px black;
+    width: 45%;
+    box-sizing: border-box;
+}
+
+.actor-image{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+.actor-details{
+    margin-top: 2vw;
+}
+
+.actor-name{
+    font-size: 3vw;
+    margin: 0;
+    padding: 0;
+}
+
+.character-name{
+    margin: 0;
+    padding: 0;
+    font-size: 2.5vw;
+}
+
+@media (max-width: 900px) {
+   .actor-container{
+       width: 90%;
+   }
+
+   .actor-image{
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+    }
+
+    .actor-name{
+        font-size: 5vw;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .character-name{
+        margin: 0;
+        padding: 0;
+        font-size: 3.5vw;
+    }
+}
