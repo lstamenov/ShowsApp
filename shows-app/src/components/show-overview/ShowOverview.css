@@ -62,7 +62,6 @@
 .show-seasons{
     font-size: 5vw;
     padding: 1vw;
-    width: 78vw;
     border-bottom: 1px solid rgb(146, 143, 143);
 }
 
@@ -72,12 +71,16 @@
     justify-content: space-around;
 }
 
-.show-more-container{
+.show-more-container, .show-crew-container{
     width: 80vw;
     background-color: rgb(235, 228, 221);
     margin-left: 5vw;
     padding-bottom: 10px;
     box-shadow: 1px 2px 10px;
+}
+
+.show-crew-container{
+    background-color: rgb(206, 204, 202);
 }
 
 .show-btn{

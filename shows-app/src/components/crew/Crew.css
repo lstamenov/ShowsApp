@@ -1,23 +1,19 @@
 .single-crew-container{
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
     margin: 1vw 0;
     background-color: rgb(206, 204, 202);
     border-radius: 5px;
     padding: 5px;
     box-shadow: 3px 5px 15px black;
-    width: 45%;
     box-sizing: border-box;
 }
 
 .crew-image{
     border-radius: 50%;
-    width: 15vw;
-    height: 15vw;
-}
-
-.crew-details{
-    margin-top: 3vw;
+    width: 150px;
+    height: 150px;
 }
 
 .crew-name{
@@ -29,5 +25,29 @@
 .crew-type{
     margin: 0;
     padding: 0;
-    font-size: 2vw;
+    font-size: 1.7vw;
 }
+
+@media (max-width: 900px) {
+    .single-crew-container{
+        width: 90%;
+    }
+ 
+    .crew-image{
+         border-radius: 50%;
+         width: 100px;
+         height: 100px;
+     }
+ 
+     .crew-name{
+         font-size: 5vw;
+         margin: 0;
+         padding: 0;
+     }
+     
+     .crew-type{
+         margin: 0;
+         padding: 0;
+         font-size: 3.5vw;
+     }
+ }

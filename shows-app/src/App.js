@@ -4,6 +4,7 @@ import Home from './components/home/Home';
 import Nav from './components/nav/Nav';
 import ShowOverview from './components/show-overview/ShowOverview';
 import Episodes from './components/episodes/Episodes';
+import ShowSearch from './components/search-shows/ShowSearch';
 
 
 function App() {
@@ -13,6 +14,9 @@ function App() {
       <Switch>
       <Route path="/" exact>
         <Home />
+      </Route>
+      <Route path="/shows/search" exact>
+        <ShowSearch />
       </Route>
       <Route path="/shows/:id" exact>
         <ShowOverview />

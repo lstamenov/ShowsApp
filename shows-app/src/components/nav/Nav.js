@@ -19,7 +19,7 @@ const Nav = () => {
           <ul>
             <li><Link to="/" onClick={showMenuHandler}>Home</Link></li>
             <li><a href="#" onClick={showMenuHandler}>Actors</a></li>
-            <li><a href="#" onClick={showMenuHandler}>Movies</a></li>
+            <li><Link to="/shows/search" onClick={showMenuHandler}>Shows</Link></li>
           </ul>
         </div>
       </nav>

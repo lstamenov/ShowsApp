@@ -125,7 +125,7 @@ const ShowOverview = () => {
                     </div>
                 }
                 {crew &&
-                <div className="show-more-container">
+                <div className="show-crew-container">
                     <h2 className="show-seasons">Crew</h2>
                     <div className="crew-container">
                         {crew.map((crew, index) => <Crew key={index} crew={crew}/>)}
