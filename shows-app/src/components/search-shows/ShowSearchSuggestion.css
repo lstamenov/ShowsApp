@@ -1,0 +1,25 @@
+.suggestion-wrapper{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 5vw;
+    border: 1px solid gray;
+    cursor: pointer;       
+    transition: 1s;
+}
+
+.show-suggestion-poster{
+    height: 5vw;
+    width: 5vw;
+}
+
+.show-suggestion-detail{
+    font-size: 2vw;
+    margin-left: 1vw;
+    cursor: pointer;       
+}
+
+.suggestion-wrapper:hover{
+    background-color: rgb(170, 170, 170);
+    color: white;
+}

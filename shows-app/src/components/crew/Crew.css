@@ -1,13 +1,13 @@
 .single-crew-container{
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
     margin: 1vw 0;
     background-color: rgb(206, 204, 202);
     border-radius: 5px;
     padding: 5px;
     box-shadow: 3px 5px 15px black;
     box-sizing: border-box;
+    width: 45%;
 }
 
 .crew-image{
