@@ -1,5 +1,7 @@
 .home{
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .title{
@@ -10,7 +12,6 @@
 
 .weekly-movies{
     background-color: rgb(192, 189, 189);
-    max-width: 90vw;
-    margin-left: 5vw;
     padding: 2vw;
+    margin: 4vw;
 }

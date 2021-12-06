@@ -88,18 +88,6 @@
     }
 }
 
-/* Background Styles Only */
-
-@import url('https://fonts.googleapis.com/css?family=Raleway');
-
-* {
-    font-family: Raleway;
-}
-
-html {
-    background-color: #DFDFDF;
-}
-
 .side-links {
   position: absolute;
   bottom: 15px;

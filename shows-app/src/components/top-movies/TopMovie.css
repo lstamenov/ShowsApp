@@ -38,7 +38,7 @@ h1{
     border: none;
     transition: 1s;
     cursor: pointer;
-    margin-top: 6vw;
+    margin-top: 2vw;
 }
 
 .show-more-btn:hover{

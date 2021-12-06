@@ -9,7 +9,7 @@ const Home = () => {
     const fetchShowsDataHandler = async () => {
         const response = await axios.get('https://api.tvmaze.com/shows');
         const allMovies = await response.data;
-        setMovies(allMovies.filter((element, index) => index < 20));
+        setMovies(allMovies.filter((element, index) => index >= 20 && index < 40));
     }
 
     useEffect(() => {

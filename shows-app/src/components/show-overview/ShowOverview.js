@@ -1,12 +1,16 @@
 import axios from "axios";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useLayoutEffect, useReducer, useState } from "react";
 import { useLocation } from "react-router";
 import Actor from "../cast/Actor";
 import Crew from "../crew/Crew";
 import Season from "../season/Season";
 import './ShowOverview.css';
+import SyncLoader from 'react-spinners/SyncLoader';
+import ShowCarousel from "../recommended/shows/ShowCarousel";
+
 
 const ShowOverview = () => {
+
     const showHideSectionReducer = (state, action) => {
         switch (action.type) {
             case 'castHandler':
@@ -36,20 +40,29 @@ const ShowOverview = () => {
         }
     }
 
+    const historyState = useLocation().state;
     const path = useLocation().pathname.split('/')[2];
     const [show, setShow] = useState();
     const [seasons, setSeasons] = useState();
     const [cast, setCast] = useState();
     const [crew, setCrew] = useState();
     const [showHideState, dispatch] = useReducer(showHideSectionReducer, {showCast: false, showCrew: false});
-
-
-    console.log(crew);
+    const [trailer, setTrailer] = useState();
+    const [isTrailerLoading, setIsTrailerLoading] = useState(true);
+    const [tvdbId, setTvDbId] = useState();
+    const [recommendedShows, setRecommendedShows] = useState();
 
     const fetchShowDataHandler = () => {
-        axios.get(`https://api.tvmaze.com/shows/${path}`)
-        .then(res => setShow(res.data))
-        .catch(err => console.error(err));
+        if(historyState){
+            console.log(historyState);
+            axios.get(`https://api.tvmaze.com/lookup/shows?thetvdb=${path}`)
+            .then(res => setShow(res.data))
+            .catch(err => console.error(err));
+        }else{
+            axios.get(`https://api.tvmaze.com/shows/${path}`)
+            .then(res => setShow(res.data))
+            .catch(err => console.error(err));
+        }   
     }
 
     const fetchCastDataHandler = () => {
@@ -72,7 +85,44 @@ const ShowOverview = () => {
         }
     }
 
-    useEffect(() => {
+    const fetchTrailerDataHandler = async () => {
+        if(show){
+                if(!historyState){
+                    const res = await axios.get(`https://api.themoviedb.org/3/find/${show.externals.imdb}?api_key=9467dada6c562150e0606a619c9ba8ff&language=en-US&external_source=imdb_id`);
+                    const tvdbShow = await res.data;
+                    const showId = await tvdbShow.tv_results[0].id;
+                    setTvDbId(showId);
+                    const videosResponse = await axios.get(`https://api.themoviedb.org/3/tv/${showId}/videos?api_key=9467dada6c562150e0606a619c9ba8ff&language=en-US`)
+                    if(videosResponse.data.results.length > 0){
+                        setTrailer(videosResponse.data.results[videosResponse.data.results.length - 1].key);
+                    }
+                }else {
+                    const videosResponse = await axios.get(`https://api.themoviedb.org/3/tv/${path}/videos?api_key=9467dada6c562150e0606a619c9ba8ff&language=en-US`)
+                    if(videosResponse.data.results.length > 0){
+                        setTrailer(videosResponse.data.results[videosResponse.data.results.length - 1].key);
+                    }
+                }
+                setIsTrailerLoading(false);
+            }
+    }
+
+    const fetchRecommendedShowsHandler = () => {
+        if(tvdbId){
+            axios.get(`https://api.themoviedb.org/3/tv/${tvdbId}/recommendations?api_key=9467dada6c562150e0606a619c9ba8ff&language=en-US`)
+            .then(res => setRecommendedShows(res.data))
+            .catch(err => console.error(err));
+        }
+    }
+
+    useLayoutEffect(() => {
+        fetchTrailerDataHandler();
+    }, [show]);
+
+    useLayoutEffect(() => {
+        fetchRecommendedShowsHandler();
+    }, [tvdbId]);
+
+    useLayoutEffect(() => {
         fetchShowDataHandler();
         fetchCastDataHandler();
         fetchCrewDataHandler();
@@ -95,6 +145,7 @@ const ShowOverview = () => {
         return genresString;
     }
 
+
     return (
         <div>
             {show && <div  className="container">
@@ -105,12 +156,19 @@ const ShowOverview = () => {
                         <h3 className="show-detail">Genres: <span>{getGenres()}</span></h3>
                         <h3 className="show-detail">Language: <span>{show.language}</span></h3>
                         <h3 className="show-detail">Year: <span>{String(show.premiered).substring(0, 4)}</span></h3>
-                        <h3 className="show-detail">Country: <span>{show.network.country.name}</span></h3>
+                        <h3 className="show-detail">Country: <span>{show.network ? show.network.country.name : ""}</span></h3>
                         <h3 className="show-detail">Rating: <span>{show.rating ? show.rating.average : "N/A"}</span></h3>
                         <h3 className="show-detail">Average runtime: <span>{show.averageRuntime} minutes</span></h3>
                         <h3 className="show-detail">Official site: <a href={show.officialSite} target="_blank">{show.officialSite}</a></h3>
                     </div>
                 </div>
+                {!isTrailerLoading ? 
+                <div className="trailer-container">
+                    <h2 className="trailer-heading">Official trailer</h2>
+                    <iframe className="trailer" src={`https://www.youtube.com/embed/${trailer}`}></iframe>
+                    </div> :
+                    <SyncLoader color={'gray'} size={50} />
+                 }
                 <div className="show-full-summary">
                     <h2 className="show-seasons">Summary</h2>
                     <p className="short-summary">{getSummary()}</p>
@@ -125,7 +183,7 @@ const ShowOverview = () => {
                     </div>
                 }
                 {crew &&
-                <div className="show-more-container">
+                <div className="show-crew-container">
                     <h2 className="show-seasons">Crew</h2>
                     <div className="crew-container">
                         {crew.map((crew, index) => <Crew key={index} crew={crew}/>)}
@@ -138,6 +196,12 @@ const ShowOverview = () => {
                         <h2 className="show-seasons">Seasons</h2>
                         {seasons.map(season => <Season key={season.id} showId={show.id} season={season}/>)}
                     </div>
+                }
+                {recommendedShows && 
+                <>  
+                    <h2 className="show-seasons">Recommended shows</h2>
+                    <ShowCarousel recommendedShows={recommendedShows.results}/>
+                </>
                 }
             </div>
                 }

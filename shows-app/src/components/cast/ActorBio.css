@@ -1,0 +1,14 @@
+.actor-bio-container{
+    width: 90%;
+    margin: 5%;
+    background-color: rgb(192, 189, 189);
+}
+
+.actor-details-container{
+    display: flex;   
+}
+
+.actor-big-image{
+    width: 40vw;
+    min-height: 50vw;
+}

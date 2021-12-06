@@ -1,10 +1,17 @@
 import './Actor.css';
+import { useHistory } from 'react-router';
 import defaultImageFemale from '../no-photo-female.jpg';
 import defaultImageMale from '../no-photo-male.jpg';
 
+
 const Actor = (props) => {
+    const history = useHistory();
+    const clickHandler = () => {
+        history.push(`/actors/${props.actor.person.id}`);
+    }
+
     return (
-        <div className="actor-container">
+        <div onClick={clickHandler} className="actor-container">
             <img className="actor-image" src={props.actor.person.image ? props.actor.person.image.original : props.actor.person.gender === 'Male' ? defaultImageMale : defaultImageFemale} alt="portrait"></img>
             <div className="actor-details">
                 <h2 className="actor-name">{props.actor.person.name}</h2>
