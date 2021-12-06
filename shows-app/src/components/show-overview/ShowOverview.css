@@ -100,6 +100,16 @@
     color: white;
 }
 
+.trailer-heading{
+    font-size: 4vw;
+    border-bottom: 1px solid rgb(146, 143, 143);
+}
+
+.trailer{
+    width: 80vw;
+    height: 45vw;
+}
+
 @media (max-width: 900px) {
     .cast-container{
         display: flex;

@@ -1,0 +1,60 @@
+.show-recommendation{
+    margin: 5vw;
+    opacity: 1;
+    border-radius: 5px;
+    box-shadow: 3px 5px 10px;
+    background-color: rgb(235, 228, 221);
+    animation: loading-movie;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes loading-movie {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.show-recommendation.active{
+    opacity: 1;
+    transition-duration: 1.5s;
+    transform: scale(1.08);
+}
+
+.show-recommendation-poster{
+    width: 55vw;
+    height: 25vw;
+    border-radius: 5px;
+}
+
+.show-recommendation-name{
+    margin: 2px;
+    font-size: 3vw;
+    color: rgb(116, 113, 111);
+    border-bottom: 1px solid gray;
+}
+
+.carousel-arrow{
+    font-size: 5vw;
+    transition: 0.5s;
+    cursor: pointer;
+    margin:0 4vw;
+}
+
+.carousel-arrow:hover{
+    font-size: 7vw;
+    margin: 0 3vw;
+}
+
+.show-movie-recommended{
+    width: 30%;
+    margin: 3%;
+    font-size: 2.5vw;
+    border: none;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px;
+    transition: 1s;
+}

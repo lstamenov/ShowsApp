@@ -5,15 +5,21 @@ import Nav from './components/nav/Nav';
 import ShowOverview from './components/show-overview/ShowOverview';
 import Episodes from './components/episodes/Episodes';
 import ShowSearch from './components/search-shows/ShowSearch';
+import ActorBio from './components/cast/ActorBio';
+import ScrollToTop from './components/scroller/ScrollToTop';
 
 
 function App() {
   return (
     <div className="App">
+      <ScrollToTop />
       <Nav />
       <Switch>
       <Route path="/" exact>
         <Home />
+      </Route>
+      <Route path="/actors/:id">
+        <ActorBio />
       </Route>
       <Route path="/shows/search" exact>
         <ShowSearch />
