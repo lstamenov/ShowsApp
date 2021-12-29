@@ -4,6 +4,8 @@ import axios from 'axios';
 import defaultImageFemale from '../no-photo-female.jpg';
 import defaultImageMale from '../no-photo-male.jpg';
 import './ActorBio.css';
+import '../recommended/shows/ShowRecommendation';
+import KnownForMovie from "../movies-known-for/KnownForMovie";
 
 const ActorBio = () => {
     const location = useLocation();
@@ -31,7 +33,7 @@ const ActorBio = () => {
     useLayoutEffect(() => {
         if(theTvDbActors){
             [...theTvDbActors].forEach(actor => {
-                if(actor.name == tvMazeActor.name){
+                if(actor.name === tvMazeActor.name){
                     setTheTvDbActor(actor);
                 }
             })
@@ -46,25 +48,32 @@ const ActorBio = () => {
         }
     }, [theTvDbActor]);
 
-    console.log(actor);
-    console.log(tvMazeActor);
     console.log(theTvDbActor);
 
     return(
         <div className="actor-bio-container">
             {
                 tvMazeActor && theTvDbActor && actor &&
+                <>
                 <div className="actor-details-container">
-                    <img className="actor-big-image" src={tvMazeActor.image ? tvMazeActor.image.original : tvMazeActor.gender == 'Male' ? defaultImageMale : defaultImageFemale}></img>
+                    <img className="actor-big-image" alt="actor-poster" src={tvMazeActor.image ? tvMazeActor.image.original : tvMazeActor.gender === 'Male' ? defaultImageMale : defaultImageFemale}></img>
                     <div className="actor-about-container">
                         <h2 className="actor-bio-name">{actor.name}</h2>
-                        <div>
+                        <div className="actor-bio-main">
                             <h4 className="actor-bio-detail">Born: <span>{actor.birthday}</span></h4>
                             <h4 className="actor-bio-detail">Place of birth: <span>{actor.place_of_birth}</span></h4>
-                            
                         </div>
+                        <h6 className="actor-bio-biography-title">Biography</h6>
+                        <p className="actor-bio-biography">{actor.biography}</p>
                     </div>
                 </div>
+                <div className="known-for-movies-container">
+                    <h2 className="known-for-movies-title">Known for:</h2>
+                    {
+                        theTvDbActor && theTvDbActor.known_for.map((movie, index) => <KnownForMovie movie={movie} key={index}/>)
+                    }
+                </div>
+                </>
             }
         </div>
     )

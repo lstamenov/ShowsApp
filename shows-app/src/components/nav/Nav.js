@@ -20,6 +20,7 @@ const Nav = () => {
             <li><Link to="/" onClick={showMenuHandler}>Home</Link></li>
             <li><Link to="/watch" onClick={showMenuHandler}>Watch</Link></li>
             <li><Link to="/shows/search" onClick={showMenuHandler}>Shows</Link></li>
+            <li><Link to="/movies/" onClick={showMenuHandler}>Movies</Link></li>
           </ul>
         </div>
       </nav>

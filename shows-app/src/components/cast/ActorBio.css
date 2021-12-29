@@ -2,13 +2,59 @@
     width: 90%;
     margin: 5%;
     background-color: rgb(192, 189, 189);
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px;
+    padding-bottom: 5px;
 }
 
 .actor-details-container{
     display: flex;   
+    border-bottom: 1px solid gray;
 }
 
 .actor-big-image{
-    width: 40vw;
-    min-height: 50vw;
+    width: 45vw;
+    height: 60vw;
+    border-radius: 10px;
+}
+
+.actor-about-container, actor-bio-main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.actor-bio-main{
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.actor-bio-name{
+    font-size: 3vw;
+    width: 100%;
+    border-bottom: 1px solid gray;
+}
+
+.actor-bio-detail{
+    margin: 15px 0px;
+    font-size: 2vw;
+    border-bottom: 1px solid gray;
+}
+
+.actor-bio-biography-title{
+    font-size: 2.5vw;
+    border-bottom: 1px solid gray;
+    width: 90%;
+    margin: 5%;
+}
+
+.actor-bio-biography{
+    width: 90%;
+    font-size: 2vw;
+}
+
+.known-for-movies-title{
+    font-size: 3vw;
+    margin: 10px;
 }

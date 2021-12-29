@@ -1,0 +1,11 @@
+.movies-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.movies-category{
+    font-size: 40px;
+    margin: 5% 5%;
+    font-weight: 500;
+    border-bottom: 1px solid gray;
+}

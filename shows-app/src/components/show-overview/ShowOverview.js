@@ -54,7 +54,6 @@ const ShowOverview = () => {
 
     const fetchShowDataHandler = () => {
         if(historyState){
-            console.log(historyState);
             axios.get(`https://api.tvmaze.com/lookup/shows?thetvdb=${path}`)
             .then(res => setShow(res.data))
             .catch(err => console.error(err));
@@ -87,20 +86,25 @@ const ShowOverview = () => {
 
     const fetchTrailerDataHandler = async () => {
         if(show){
-                if(!historyState){
-                    const res = await axios.get(`https://api.themoviedb.org/3/find/${show.externals.imdb}?api_key=9467dada6c562150e0606a619c9ba8ff&language=en-US&external_source=imdb_id`);
-                    const tvdbShow = await res.data;
-                    const showId = await tvdbShow.tv_results[0].id;
-                    setTvDbId(showId);
-                    const videosResponse = await axios.get(`https://api.themoviedb.org/3/tv/${showId}/videos?api_key=9467dada6c562150e0606a619c9ba8ff&language=en-US`)
-                    if(videosResponse.data.results.length > 0){
-                        setTrailer(videosResponse.data.results[videosResponse.data.results.length - 1].key);
+                    try{
+                        if(!historyState){
+                            const res = await axios.get(`https://api.themoviedb.org/3/find/${show.externals.imdb}?api_key=9467dada6c562150e0606a619c9ba8ff&language=en-US&external_source=imdb_id`);
+                            const tvdbShow = await res.data;
+                            const showId = await tvdbShow.tv_results[0].id;
+                            setTvDbId(showId ? showId : 0);
+                            const videosResponse = await axios.get(`https://api.themoviedb.org/3/tv/${showId}/videos?api_key=9467dada6c562150e0606a619c9ba8ff&language=en-US`)
+                            if(videosResponse.data.results.length > 0){
+                                setTrailer(videosResponse.data.results[videosResponse.data.results.length - 1].key);
+                            }
+                        }else {
+                            const videosResponse = await axios.get(`https://api.themoviedb.org/3/tv/${path}/videos?api_key=9467dada6c562150e0606a619c9ba8ff&language=en-US`)
+                            if(videosResponse.data.results.length > 0){
+                                setTrailer(videosResponse.data.results[videosResponse.data.results.length - 1].key);
+                            }
                     }
-                }else {
-                    const videosResponse = await axios.get(`https://api.themoviedb.org/3/tv/${path}/videos?api_key=9467dada6c562150e0606a619c9ba8ff&language=en-US`)
-                    if(videosResponse.data.results.length > 0){
-                        setTrailer(videosResponse.data.results[videosResponse.data.results.length - 1].key);
-                    }
+                    
+                }catch(err){
+                    setTrailer('');
                 }
                 setIsTrailerLoading(false);
             }
@@ -165,7 +169,7 @@ const ShowOverview = () => {
                 {!isTrailerLoading ? 
                 <div className="trailer-container">
                     <h2 className="trailer-heading">Official trailer</h2>
-                    <iframe className="trailer" src={`https://www.youtube.com/embed/${trailer}`}></iframe>
+                    {trailer && <iframe className="trailer" src={`https://www.youtube.com/embed/${trailer}`}></iframe>}
                     </div> :
                     <SyncLoader color={'gray'} size={50} />
                  }

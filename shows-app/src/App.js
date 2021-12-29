@@ -7,6 +7,8 @@ import Episodes from './components/episodes/Episodes';
 import ShowSearch from './components/search-shows/ShowSearch';
 import ActorBio from './components/cast/ActorBio';
 import ScrollToTop from './components/scroller/ScrollToTop';
+import MoviesPage from './components/movies/MoviesPage';
+import MovieOverview from './components/movies/movie/movie-overview/MovieOverview';
 
 
 function App() {
@@ -17,6 +19,12 @@ function App() {
       <Switch>
       <Route path="/" exact>
         <Home />
+      </Route>
+      <Route path="/movies/:id">
+        <MovieOverview />
+      </Route>
+      <Route path="/movies" exact>
+        <MoviesPage />
       </Route>
       <Route path="/actors/:id">
         <ActorBio />

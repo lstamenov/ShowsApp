@@ -8,6 +8,8 @@
     box-shadow: 3px 5px 15px black;
     width: 45%;
     box-sizing: border-box;
+    cursor: pointer;
+    transition: 1s;
 }
 
 .actor-image{
@@ -26,6 +28,10 @@
     margin: 0;
     padding: 0;
     font-size: 3vw;
+}
+
+.actor-container:hover{
+    background-color: rgb(255, 255, 255);
 }
 
 @media (max-width: 900px) {

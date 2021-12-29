@@ -9,15 +9,19 @@ const ShowCarousel = ( {recommendedShows} ) => {
         setCurrentShowIndex(currentShowIndex === recommendedShows.length - 1 ? 0 : currentShowIndex + 1);
     }
 
+    const leftArrowClickHandler = () => {
+        setCurrentShowIndex(currentShowIndex === 0 ? recommendedShows.length - 1 : currentShowIndex - 1);
+    }
+
     return(
         <div className="recommended-shows-container">
-            <i class="fas fa-arrow-circle-left carousel-arrow" ></i>
+            <i className="fas fa-arrow-circle-left carousel-arrow" onClick={leftArrowClickHandler}></i>
             {recommendedShows.map((show, index) => {
                 return (
                     index === currentShowIndex && <ShowRecommendation key={index} show={show} styles={index === currentShowIndex ? 'show-recommendation active' : 'show-recommendation'}/>
                 )
             })}
-            <i class="fas fa-arrow-circle-right carousel-arrow" onClick={rigthArrowClickHandler}></i>
+            <i className="fas fa-arrow-circle-right carousel-arrow" onClick={rigthArrowClickHandler}></i>
         </div>
     ) 
 }
